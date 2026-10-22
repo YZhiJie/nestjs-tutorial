@@ -1,0 +1,24 @@
+{
+  "series": "Nest 实战漫画剧场 · 霓虹墨 Neon Ink",
+  "version": "1.0.0",
+  "canvas": { "width": 1200, "height": 840 },
+  "panels": { "count": 4, "width": 572, "height": 361 },
+  "characters": ["像素酱", "标签君", "码叔"],
+  "episodes": [
+    { "ep": 1, "slug": "EP.01-nestjs-intro", "title": "初识 NestJS", "part": "docs/01-introduction" },
+    { "ep": 2, "slug": "EP.02-quick-start", "title": "最小可运行应用", "part": "docs/02-quick-start" },
+    { "ep": 3, "slug": "EP.03-core-concepts", "title": "请求生命周期", "part": "docs/03-overview" },
+    { "ep": 4, "slug": "EP.04-modules", "title": "模块系统", "part": "docs/04-modules" },
+    { "ep": 5, "slug": "EP.05-controllers", "title": "控制器与路由", "part": "docs/05-controllers" },
+    { "ep": 6, "slug": "EP.06-providers", "title": "服务与提供者", "part": "docs/06-providers" },
+    { "ep": 7, "slug": "EP.07-dependency-injection", "title": "依赖注入进阶", "part": "docs/07-dependency-injection" },
+    { "ep": 8, "slug": "EP.08-middleware", "title": "中间件", "part": "docs/08-middleware" },
+    { "ep": 9, "slug": "EP.09-guards", "title": "守卫与鉴权", "part": "docs/09-guards" },
+    { "ep": 10, "slug": "EP.10-interceptors", "title": "拦截器与 AOP", "part": "docs/10-interceptors" },
+    { "ep": 11, "slug": "EP.11-pipes", "title": "管道与校验", "part": "docs/11-pipes" },
+    { "ep": 12, "slug": "EP.12-exception-filters", "title": "异常过滤器", "part": "docs/12-exception-filters" },
+    { "ep": 13, "slug": "EP.13-database", "title": "TypeORM 数据库", "part": "docs/13-database" },
+    { "ep": 14, "slug": "EP.14-auth", "title": "JWT 认证授权", "part": "docs/14-auth" },
+    { "ep": 15, "slug": "EP.15-deployment", "title": "生产部署", "part": "docs/15-deployment" }
+  ]
+}
