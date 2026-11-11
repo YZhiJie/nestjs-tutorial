@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="440" viewBox="0 0 960 440" role="img" aria-labelledby="depTitle depDesc">
+  <title id="depTitle">生产部署拓扑</title>
+  <desc id="depDesc">客户端经 Nginx 进入两个 API 副本，API 连接 PostgreSQL 与 Redis；CI 构建镜像推送仓库，滚动更新时以 readiness 探针决定是否接流量。</desc>
+  <defs>
+    <marker id="depArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3d4653" />
+    </marker>
+    <marker id="depArrowDashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f5f8b" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="440" rx="16" fill="#f8f9fb" stroke="#d5dae2" />
+  <text x="48" y="52" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="24" font-weight="700" fill="#14181f">生产部署拓扑与流量入口</text>
+  <text x="48" y="78" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" fill="#5b6472">入口只暴露 Nginx；应用无状态可横向扩容，数据库与缓存留在内网</text>
+
+  <!-- 客户端 / Nginx -->
+  <rect x="44" y="132" width="150" height="72" rx="10" fill="#f1f2f5" stroke="#aab3c0" />
+  <text x="119" y="164" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="16" font-weight="600" fill="#14181f" text-anchor="middle">客户端</text>
+  <text x="119" y="186" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="13" fill="#46505f" text-anchor="middle">HTTPS</text>
+
+  <rect x="242" y="132" width="150" height="72" rx="10" fill="#e8f1f7" stroke="#7fa6bf" />
+  <text x="317" y="164" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="16" font-weight="600" fill="#14181f" text-anchor="middle">Nginx</text>
+  <text x="317" y="186" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="13" fill="#46505f" text-anchor="middle">TLS / 限流 / 静态</text>
+
+  <!-- API 副本 -->
+  <rect x="440" y="112" width="196" height="160" rx="12" fill="#e6f3ec" stroke="#7fb99a" />
+  <text x="538" y="138" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" font-weight="600" fill="#1f6f4a" text-anchor="middle">API 副本（无状态）</text>
+  <rect x="458" y="150" width="160" height="48" rx="8" fill="#ffffff" stroke="#3d4653" />
+  <text x="538" y="180" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" fill="#14181f" text-anchor="middle">api-1</text>
+  <rect x="458" y="208" width="160" height="48" rx="8" fill="#ffffff" stroke="#3d4653" />
+  <text x="538" y="238" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" fill="#14181f" text-anchor="middle">api-2</text>
+
+  <!-- 数据层 -->
+  <rect x="700" y="112" width="212" height="72" rx="10" fill="#fce8ef" stroke="#d98aa4" />
+  <text x="806" y="144" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="16" font-weight="600" fill="#14181f" text-anchor="middle">PostgreSQL</text>
+  <text x="806" y="166" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="13" fill="#46505f" text-anchor="middle">内网 / 迁移随启动执行</text>
+
+  <rect x="700" y="200" width="212" height="72" rx="10" fill="#fce8ef" stroke="#d98aa4" />
+  <text x="806" y="232" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="16" font-weight="600" fill="#14181f" text-anchor="middle">Redis</text>
+  <text x="806" y="254" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="13" fill="#46505f" text-anchor="middle">缓存 / 队列（AOF）</text>
+
+  <!-- CI / registry -->
+  <rect x="242" y="318" width="150" height="66" rx="10" fill="#f1f2f5" stroke="#aab3c0" />
+  <text x="317" y="346" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="15" font-weight="600" fill="#14181f" text-anchor="middle">CI</text>
+  <text x="317" y="368" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="13" fill="#46505f" text-anchor="middle">构建 + 测试 + 扫描</text>
+
+  <rect x="440" y="318" width="196" height="66" rx="10" fill="#f1f2f5" stroke="#aab3c0" />
+  <text x="538" y="346" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="15" font-weight="600" fill="#14181f" text-anchor="middle">镜像仓库</text>
+  <text x="538" y="368" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="13" fill="#46505f" text-anchor="middle">带 digest 的不可变标签</text>
+
+  <!-- 连接线 -->
+  <g stroke="#3d4653" stroke-width="1.8" fill="none">
+    <line x1="194" y1="168" x2="238" y2="168" marker-end="url(#depArrow)" />
+    <line x1="392" y1="168" x2="436" y2="168" marker-end="url(#depArrow)" />
+    <line x1="636" y1="148" x2="696" y2="148" marker-end="url(#depArrow)" />
+    <line x1="636" y1="232" x2="696" y2="232" marker-end="url(#depArrow)" />
+    <line x1="392" y1="351" x2="436" y2="351" marker-end="url(#depArrow)" />
+  </g>
+
+  <g stroke="#1f5f8b" stroke-width="1.8" fill="none" stroke-dasharray="6 4">
+    <path d="M 538 318 L 538 278" marker-end="url(#depArrowDashed)" />
+  </g>
+  <text x="550" y="304" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="12" fill="#1f5f8b">拉取镜像，滚动更新</text>
+
+  <text x="48" y="410" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="13" fill="#5b6472">readiness 通过才接流量；关闭时先摘流量，再等 stop_grace_period 内完成队列任务与连接池回收。数据库与 Redis 不暴露公网端口。</text>
+</svg>

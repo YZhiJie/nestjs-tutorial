@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="460" viewBox="0 0 960 460" role="img" aria-labelledby="reqTitle reqDesc">
+  <title id="reqTitle">NestJS 请求生命周期</title>
+  <desc id="reqDesc">请求依次经过中间件、守卫、拦截器前置、管道、控制器与服务，返回时经过拦截器后置；任意阶段抛出的异常由异常过滤器统一处理。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3d4653" />
+    </marker>
+    <marker id="arrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b3244d" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="460" rx="16" fill="#f8f9fb" stroke="#d5dae2" />
+  <text x="48" y="54" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="24" font-weight="700" fill="#14181f">一次请求在 NestJS 中的执行顺序</text>
+  <text x="48" y="82" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" fill="#5b6472">扩展点按固定顺序串成一条链，守卫先于管道，拦截器的后置逻辑在方法返回后执行</text>
+
+  <!-- 第一行：1-5 -->
+  <g font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif">
+    <rect x="50" y="112" width="164" height="84" rx="10" fill="#e8f1f7" stroke="#7fa6bf" />
+    <text x="62" y="138" font-size="13" fill="#1f5f8b">1</text>
+    <text x="132" y="146" font-size="17" font-weight="600" fill="#14181f" text-anchor="middle">中间件</text>
+    <text x="132" y="172" font-size="13" fill="#46505f" text-anchor="middle">原始 req / res</text>
+    <text x="132" y="188" font-size="13" fill="#46505f" text-anchor="middle">日志、CORS</text>
+
+    <rect x="224" y="112" width="164" height="84" rx="10" fill="#fce8ef" stroke="#d98aa4" />
+    <text x="236" y="138" font-size="13" fill="#b3244d">2</text>
+    <text x="306" y="146" font-size="17" font-weight="600" fill="#14181f" text-anchor="middle">守卫 Guard</text>
+    <text x="306" y="172" font-size="13" fill="#46505f" text-anchor="middle">鉴权、限流</text>
+    <text x="306" y="188" font-size="13" fill="#46505f" text-anchor="middle">不通过直接 401/403</text>
+
+    <rect x="398" y="112" width="164" height="84" rx="10" fill="#e8f1f7" stroke="#7fa6bf" />
+    <text x="410" y="138" font-size="13" fill="#1f5f8b">3</text>
+    <text x="480" y="146" font-size="17" font-weight="600" fill="#14181f" text-anchor="middle">拦截器·前</text>
+    <text x="480" y="172" font-size="13" fill="#46505f" text-anchor="middle">计时、追踪 ID</text>
+    <text x="480" y="188" font-size="13" fill="#46505f" text-anchor="middle">改写入参</text>
+
+    <rect x="572" y="112" width="164" height="84" rx="10" fill="#e8f1f7" stroke="#7fa6bf" />
+    <text x="584" y="138" font-size="13" fill="#1f5f8b">4</text>
+    <text x="654" y="146" font-size="17" font-weight="600" fill="#14181f" text-anchor="middle">管道 Pipe</text>
+    <text x="654" y="172" font-size="13" fill="#46505f" text-anchor="middle">DTO 校验</text>
+    <text x="654" y="188" font-size="13" fill="#46505f" text-anchor="middle">类型转换</text>
+
+    <rect x="746" y="112" width="164" height="84" rx="10" fill="#e6f3ec" stroke="#7fb99a" />
+    <text x="758" y="138" font-size="13" fill="#1f6f4a">5</text>
+    <text x="828" y="146" font-size="17" font-weight="600" fill="#14181f" text-anchor="middle">Controller</text>
+    <text x="828" y="172" font-size="13" fill="#46505f" text-anchor="middle">调 Service</text>
+    <text x="828" y="188" font-size="13" fill="#46505f" text-anchor="middle">只做参数编排</text>
+  </g>
+
+  <g stroke="#3d4653" stroke-width="1.8" fill="none" marker-end="url(#arrow)">
+    <line x1="214" y1="154" x2="220" y2="154" />
+    <line x1="388" y1="154" x2="394" y2="154" />
+    <line x1="562" y1="154" x2="568" y2="154" />
+    <line x1="736" y1="154" x2="742" y2="154" />
+  </g>
+
+  <!-- 第二行：6-8 -->
+  <g font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif">
+    <rect x="746" y="256" width="164" height="84" rx="10" fill="#e8f1f7" stroke="#7fa6bf" />
+    <text x="758" y="282" font-size="13" fill="#1f5f8b">6</text>
+    <text x="828" y="290" font-size="17" font-weight="600" fill="#14181f" text-anchor="middle">拦截器·后</text>
+    <text x="828" y="316" font-size="13" fill="#46505f" text-anchor="middle">包装响应</text>
+    <text x="828" y="332" font-size="13" fill="#46505f" text-anchor="middle">计算耗时</text>
+
+    <rect x="530" y="256" width="164" height="84" rx="10" fill="#f1f2f5" stroke="#aab3c0" />
+    <text x="542" y="282" font-size="13" fill="#4a5565">7</text>
+    <text x="612" y="290" font-size="17" font-weight="600" fill="#14181f" text-anchor="middle">响应</text>
+    <text x="612" y="316" font-size="13" fill="#46505f" text-anchor="middle">统一响应外壳</text>
+    <text x="612" y="332" font-size="13" fill="#46505f" text-anchor="middle">2xx JSON</text>
+
+    <rect x="50" y="256" width="164" height="84" rx="10" fill="#f1f2f5" stroke="#aab3c0" />
+    <text x="62" y="282" font-size="13" fill="#4a5565">8</text>
+    <text x="132" y="290" font-size="17" font-weight="600" fill="#14181f" text-anchor="middle">客户端</text>
+    <text x="132" y="316" font-size="13" fill="#46505f" text-anchor="middle">拿到结果</text>
+    <text x="132" y="332" font-size="13" fill="#46505f" text-anchor="middle">或错误码</text>
+  </g>
+
+  <g stroke="#3d4653" stroke-width="1.8" fill="none" marker-end="url(#arrow)">
+    <path d="M 828 196 L 828 252" />
+    <line x1="742" y1="298" x2="698" y2="298" />
+    <line x1="526" y1="298" x2="218" y2="298" />
+  </g>
+
+  <!-- 异常过滤器 -->
+  <rect x="50" y="374" width="860" height="52" rx="10" fill="#fff4f6" stroke="#b3244d" stroke-dasharray="6 4" />
+  <text x="70" y="406" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="16" font-weight="600" fill="#8f1c3e">异常过滤器 ExceptionFilter</text>
+  <text x="330" y="406" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" fill="#46505f">以上任意阶段抛出异常都会被接住，转成统一错误响应，不再进入后续拦截器</text>
+
+  <text x="48" y="448" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="13" fill="#5b6472">顺序不可调换：鉴权失败时，管道与控制器都不会执行；拦截器后置逻辑只在正常返回时触发。</text>
+</svg>

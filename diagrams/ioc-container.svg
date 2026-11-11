@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="460" viewBox="0 0 960 460" role="img" aria-labelledby="iocTitle iocDesc">
+  <title id="iocTitle">NestJS IoC 容器与模块边界</title>
+  <desc id="iocDesc">模块是依赖注入的可见性边界：UsersService 通过 USER_REPOSITORY 令牌注入实现，AuditService 经 exports 与 imports 才可被 UsersService 使用。</desc>
+  <defs>
+    <marker id="iocArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3d4653" />
+    </marker>
+    <marker id="iocArrowDashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b3244d" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="460" rx="16" fill="#f8f9fb" stroke="#d5dae2" />
+  <text x="48" y="52" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="24" font-weight="700" fill="#14181f">依赖注入靠 Token 解析，模块决定谁能看见</text>
+  <text x="48" y="80" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" fill="#5b6472">接口在运行时不存在，所以用 Token 当索引；没写 exports 的 Provider，别的模块注入不到</text>
+
+  <!-- AppModule -->
+  <rect x="36" y="102" width="888" height="268" rx="14" fill="#ffffff" stroke="#aab3c0" />
+  <text x="56" y="130" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" font-weight="600" fill="#4a5565">AppModule</text>
+
+  <!-- UsersModule -->
+  <rect x="60" y="146" width="500" height="204" rx="12" fill="#f2f7fb" stroke="#7fa6bf" />
+  <text x="80" y="172" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" font-weight="600" fill="#1f5f8b">UsersModule</text>
+
+  <rect x="82" y="188" width="200" height="70" rx="9" fill="#ffffff" stroke="#3d4653" />
+  <text x="182" y="216" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="16" font-weight="600" fill="#14181f" text-anchor="middle">UsersService</text>
+  <text x="182" y="240" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="13" fill="#46505f" text-anchor="middle">构造注入端口</text>
+
+  <rect x="82" y="278" width="200" height="56" rx="28" fill="#fff4f6" stroke="#b3244d" stroke-dasharray="6 4" />
+  <text x="182" y="302" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" font-weight="600" fill="#8f1c3e" text-anchor="middle">USER_REPOSITORY</text>
+  <text x="182" y="322" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="12" fill="#8f1c3e" text-anchor="middle">InjectionToken</text>
+
+  <rect x="330" y="278" width="206" height="56" rx="9" fill="#ffffff" stroke="#3d4653" />
+  <text x="433" y="302" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" font-weight="600" fill="#14181f" text-anchor="middle">TypeOrmUserRepository</text>
+  <text x="433" y="322" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="12" fill="#46505f" text-anchor="middle">useClass 绑定到 Token</text>
+
+  <!-- AuditModule -->
+  <rect x="586" y="146" width="314" height="150" rx="12" fill="#f2f7fb" stroke="#7fa6bf" />
+  <text x="606" y="172" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" font-weight="600" fill="#1f5f8b">AuditModule</text>
+
+  <rect x="608" y="188" width="188" height="70" rx="9" fill="#ffffff" stroke="#3d4653" />
+  <text x="702" y="216" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="16" font-weight="600" fill="#14181f" text-anchor="middle">AuditService</text>
+  <text x="702" y="240" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="13" fill="#46505f" text-anchor="middle">exports 后才对外可见</text>
+
+  <!-- 箭头 -->
+  <g stroke="#3d4653" stroke-width="1.8" fill="none">
+    <path d="M 182 258 L 182 274" marker-end="url(#iocArrow)" />
+    <path d="M 326 306 L 286 306" marker-end="url(#iocArrow)" />
+    <path d="M 604 212 L 566 212" marker-end="url(#iocArrow)" />
+  </g>
+
+  <text x="190" y="272" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="12" fill="#5b6472">注入</text>
+  <text x="296" y="298" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="12" fill="#5b6472">提供</text>
+  <text x="566" y="204" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="12" fill="#5b6472">imports</text>
+
+  <!-- 结论 -->
+  <rect x="36" y="392" width="888" height="44" rx="9" fill="#fff4f6" stroke="#b3244d" stroke-dasharray="6 4" />
+  <text x="56" y="420" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif" font-size="14" fill="#8f1c3e">同一个类被两个模块分别写进 providers，会各自实例化一份；要单例共享，必须由提供方 exports、使用方 imports。</text>
+</svg>
